@@ -350,6 +350,7 @@ var scrollVis = function() {
      *
      */
     function showTitle() {
+		removePieChart()
         removeLineChart();
         g.selectAll(".count-title")
             .transition()
@@ -479,12 +480,11 @@ var scrollVis = function() {
         removePieChart();
         d3.selectAll(".openvis-title")
             .transition()
-            .duration(600)
+            .duration(0)
             .attr("opacity", 0);
-        $('svg').css('margin-top', '12%');
-
-        makeChart(svg, 19);
-
+		$('#vis').append('<div id="LineChart" class="osef" style="  position: relative;top: 0%;"><div class="innerCont"/></div></div>')
+        makeChart();
+		invertDivAndSvg();
     }
 
 	function removeLineChart()
@@ -524,7 +524,7 @@ var scrollVis = function() {
 		removePieChart()
 		showPieChart();
 		updateDataCat2();
-
+		removeLineChart()
 	}
 	function showUpdateChartCat3(){
 		removePieChart()

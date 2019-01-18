@@ -1,9 +1,9 @@
 
-function makeChart(svg)
+function makeChart()
 {
 
-    var margin = {top:0, left:0, bottom:0, right:0},
-        width = 500 - margin.left - margin.right,
+    var margin = {top:0, left:20, bottom:50, right:70},
+        width = 600 - margin.left - margin.right,
         height = 450 -  margin.top - margin.bottom;
 
     // Parse the date / time
@@ -35,7 +35,11 @@ function makeChart(svg)
 	// Scale the range of the data
 	x.domain(d3.extent(data, function(d) { return d.date; }));
 	y.domain([0, d3.max(data, function(d) { return d.TWh; })]);
-
+	var svg = d3.select("#LineChart").append("svg")
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom)
+	
+	$('svg').css('margin-top', '12%');
 	// Add the valueline path.
 	var pathLineChart = svg.append("path")
 	    .attr("class", "lineChart")
@@ -47,8 +51,8 @@ function makeChart(svg)
   svg.append("text")
 	  .attr("class","xLegend")
       .attr("transform",
-            "translate(" + (width/2 + 60) + " ," + 
-                           (height + margin.top + 50) + ")")
+            "translate(" + (width - 170) + " ," + 
+                           (height + 45) + ")")
       .style("text-anchor", "middle")
       .text("Date");
 	  
@@ -56,8 +60,8 @@ function makeChart(svg)
   svg.append("text")
 	  .attr("class","yLegend")
       .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left + 5)
-      .attr("x",0 - (height / 2) -30)
+      .attr("y", 10)
+      .attr("x",-200 )
       .attr("dy", "1em")
       .style("text-anchor", "middle")
       .text("TWh");   
